@@ -26,6 +26,10 @@ spring:
     password: tarena2017Up;
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 127.0.0.1
+    connect-timeout: 5000
+    password: bo220...
   # jackson配置
   jackson:
     # 为null的属性不显示到响应结果中

@@ -19,20 +19,20 @@
 
     <!-- int insert(Album album); -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        insert into pms_album (name, description, sort)
+        insert into mall_pms.pms_album (name, description, sort)
         values (#{name}, #{description}, #{sort})
     </insert>
 
     <!-- int deleteById(Long id); -->
     <delete id="deleteById">
         delete
-        from pms_album
+        from mall_pms.pms_album
         where id = #{id}
     </delete>
 
     <!-- int update(Album album); -->
     <update id="update">
-        update pms_album
+        update mall_pms.pms_album
         <set>
             <if test="name != null">
                 name=#{name},
@@ -51,7 +51,7 @@
     <select id="getById" resultMap="StandardResultMap">
         select
         <include refid="StandardQueryFields"/>
-        from pms_album
+        from mall_pms.pms_album
         where id = #{id}
     </select>
 
@@ -59,7 +59,7 @@
     <select id="getByName" resultMap="StandardResultMap">
         select
         <include refid="StandardQueryFields"/>
-        from pms_album
+        from mall_pms.pms_album
         where name = #{name}
     </select>
 
@@ -68,7 +68,7 @@
     <select id="list" resultMap="StandardResultMap">
         select
         <include refid="StandardQueryFields"/>
-        from pms_album
+        from mall_pms.pms_album
         order by sort desc, gmt_modified desc
     </select>
 

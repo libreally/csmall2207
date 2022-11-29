@@ -5,6 +5,10 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 100MB
+  redis:
+    host: 127.0.0.1
+    connect-timeout: 5000
+    password: bo220...
   jackson:
     default-property-inclusion: non_null
   profiles:
