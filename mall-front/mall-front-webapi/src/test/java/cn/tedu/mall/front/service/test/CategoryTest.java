@@ -1,7 +1,7 @@
 package cn.tedu.mall.front.service.test;
 
 import cn.tedu.mall.front.MallFrontWebApiApplication;
-import cn.tedu.mall.front.service.impl.FrontCategoryServiceImpl;
+import cn.tedu.mall.front.security.impl.FrontCategoryServiceImpl;
 import cn.tedu.mall.pojo.front.vo.FrontCategoryTreeVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;

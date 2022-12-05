@@ -4,19 +4,81 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="cn.tedu.mall.pojo.order.model.OmsCart">
-        <id column="id" property="id" />
-        <result column="user_id" property="userId" />
-        <result column="sku_id" property="skuId" />
-        <result column="title" property="title" />
-        <result column="main_picture" property="mainPicture" />
-        <result column="price" property="price" />
-        <result column="quantity" property="quantity" />
-        <result column="gmt_create" property="gmtCreate" />
-        <result column="gmt_modified" property="gmtModified" />
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="sku_id" property="skuId"/>
+        <result column="title" property="title"/>
+        <result column="main_picture" property="mainPicture"/>
+        <result column="price" property="price"/>
+        <result column="quantity" property="quantity"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
         <result column="bar_code" property="barCode"/>
         <result column="data" property="data"/>
     </resultMap>
+    <!--定义插叙omsCart使用的片段名-->
+    <sql id="SimpleQueryFields">
+        <if test="true">
+            id,
+            user_id,
+            sku_id,
+            title,
+            main_picture,
+            price,
+            quantity,
+            gmt_create,
+            gmt_modified
+        </if>
+    </sql>
+    <!--int deleteCartsByIds(Long[] ids);-->
+    <delete id="deleteCartsByIds">
+        DELETE  FROM mall_oms.oms_cart
+        WHERE id IN
+            <foreach collection="array" item="id" separator="," open="(" close=")">
+                #{id}
+            </foreach>
+    </delete>
+    <!--int deleteCartsByUserId(Long userId);-->
+    <delete id="deleteCartsByUserId">
+        DELETE FROM mall_oms.oms_cart
+        WHERE user_id=#{userId}
+    </delete>
+    <!--int deleteCartByUserIdAndSkuId(OmsCart omsCart);-->
+    <delete id="deleteCartByUserIdAndSkuId">
+        DELETE FROM mall_oms.oms_cart
+        WHERE user_id=#{userId}
+        AND sku_id=#{skuId}
+    </delete>
 
+    <!--OmsCart selectExistsCart(@Param("userId") Long userId,
+                             @Param("skuId") Long skuId);-->
+    <select id="selectExistsCart" resultMap="BaseResultMap">
+        SELECT
+        <include refid="SimpleQueryFields"/>
+        FROM mall_oms.oms_cart
+        WHERE user_id=#{userId}
+        AND sku_id=#{skuId}
+    </select>
+    <!--List<CartStandardVO> selectCartsByUserId(Long userId);-->
+    <select id="selectCartsByUserId" resultType="cn.tedu.mall.pojo.order.vo.CartStandardVO">
+        SELECT <include refid="SimpleQueryFields"/>
+        FROM mall_oms.oms_cart
+        WHERE user_id=#{userId}
+    </select>
+    <!--int saveCart(OmsCart omsCart);-->
+    <insert id="saveCart" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO mall_oms.oms_cart(user_id, sku_id, title, main_picture, price, quantity)
+        VALUES (#{userId},#{skuId}, #{title},#{mainPicture},#{price},#{quantity})
+    </insert>
+    <!--int updateQuantityById(OmsCart omsCart);-->
+    <update id="updateQuantityById">
+        UPDATE
+            mall_oms.oms_cart
+        SET
+            quantity=#{quantity}
+        WHERE
+            id=#{id}
+    </update>
 
 
 </mapper>

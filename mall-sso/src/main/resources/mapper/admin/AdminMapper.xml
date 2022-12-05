@@ -64,13 +64,13 @@
         phone,
         email,
         description,
-        is_enable,
+        enable,
         last_login_ip,
         login_count,
         gmt_last_login,
         gmt_create,
         gmt_modified
-        from ams_admin
+        from mall_ams.ams_admin
         where
         username=#{username}
     </select>
@@ -78,7 +78,7 @@
         select
             <include refid="StandardQueryFields"/>
         from
-            ams_admin
+            mall_ams.ams_admin
         where
             id=#{id};
     </select>

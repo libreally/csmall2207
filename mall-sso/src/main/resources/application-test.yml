@@ -23,7 +23,7 @@ spring:
   redis:
     host: ${my.server.addr}
     port: 6379
-    password:
+    password: bo220...
 
 logging:
   level:

@@ -3,7 +3,7 @@
 <mapper namespace="cn.tedu.mall.sso.mapper.admin.AdminLoginLogMapper">
 
     <insert id="insertAdminLoginLog">
-        insert into ams_login_log (
+        insert into mall_ams.ams_login_log (
         admin_id,
         username,
         nickname,
