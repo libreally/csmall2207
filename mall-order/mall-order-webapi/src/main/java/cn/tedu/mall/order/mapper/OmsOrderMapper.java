@@ -14,6 +14,7 @@ public interface OmsOrderMapper {
     // 查询当前用户指定时间范围内的所有订单信息(关联订单项)
     List<OrderListVO> selectOrdersBetweenTimes(OrderListTimeDTO orderListTimeDTO);
 
+    int updateById(OmsOrder order);
 
 
 }

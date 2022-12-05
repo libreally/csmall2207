@@ -7,22 +7,32 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.xml.bind.SchemaOutputResolver;
+
 
 @SpringBootTest
 public class TestSearch {
 
     @Autowired
     private ISearchService searchService;
+    @Autowired
+    private SpuForElasticRepository spuRepository;
 
     @Test
     void loadData(){
         searchService.loadSpuByPage();
         System.out.println("ok");
     }
+    @Test
+    void showData(){
+        Iterable<SpuForElastic> spus = spuRepository.findAll();
+        spus.forEach(System.out::println);
+    }
 
-    @Autowired
-    private SpuForElasticRepository elasticRepository;
+    @Test
+    void showTitle(){
+        Iterable<SpuForElastic> spus = spuRepository.querySpuForElasticsByTitleMatches("手机");
+        spus.forEach(System.out::println);
+    }
 
    /* @Test
     void getAll(){

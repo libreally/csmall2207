@@ -169,7 +169,11 @@ public class OmsOrderServiceImpl implements IOmsOrderService {
 
     @Override
     public void updateOrderState(OrderStateUpdateDTO orderStateUpdateDTO) {
-
+        OmsOrder order = new OmsOrder();
+        //orderStateUpdateDTO中包含id和state属性，赋值order
+        BeanUtils.copyProperties(orderStateUpdateDTO,order);
+        //order包含了id和state属性可以执行修改操作
+        omsOrderMapper.updateById(order);
     }
 
     // 分页和查询当前登录用户,指定时间范围内所有订单
