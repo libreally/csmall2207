@@ -12,7 +12,40 @@
         <result column="gmt_modified" property="gmtModified" />
     </resultMap>
     <!--  查询秒杀spu的sql片段  -->
-
+    <sql id="SimpleFields">
+        <if test="true">
+            id,
+            spu_id,
+            list_price,
+            start_time,
+            end_time,
+            gmt_create,
+            gmt_modified
+        </if>
+    </sql>
+    <!--List<SeckillSpu> findSeckillSpus();-->
+    <select id="findSeckillSpus" resultMap="BaseResultMap">
+        select <include refid="SimpleFields"/>
+        from mall_seckill.seckill_spu
+    </select>
+    <!--List< SeckillSpu> findSeckillSpuByTime(LocalDateTime time);-->
+    <select id="findSeckillSpuByTime" resultMap="BaseResultMap">
+        SELECT <include refid="SimpleFields"/>
+            FROM mall_seckill.seckill_spu
+        WHERE start_time &lt; #{time}
+        AND end_time &gt; #{time}
+    </select>
+    <!--SeckillSpu findSeckillSpuById(Long spuId); -->
+    <select id="findSeckillSpuById" resultMap="BaseResultMap">
+        SELECT <include refid="SimpleFields"/>
+        FROM mall_seckill.seckill_spu
+        WHERE spu_id=#{spuId}
+    </select>
+    <!--Long[]  findAllSeckillSpuIds();-->
+    <select id="findAllSeckillSpuIds" resultType="Long">
+        SELECT spu_id
+        FROM mall_seckill.seckill_spu
+    </select>
 
 
 </mapper>
