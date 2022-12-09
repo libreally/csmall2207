@@ -2,6 +2,7 @@ package cn.tedu.mall.seckill.controller;
 
 import cn.tedu.mall.common.restful.JsonPage;
 import cn.tedu.mall.common.restful.JsonResult;
+import cn.tedu.mall.pojo.seckill.vo.SeckillSpuDetailSimpleVO;
 import cn.tedu.mall.pojo.seckill.vo.SeckillSpuVO;
 import cn.tedu.mall.seckill.service.ISeckillSpuService;
 
@@ -45,4 +46,12 @@ public class SeckillSpuController {
         return JsonResult.ok(seckillSpuVO);
     }
 
+    @GetMapping("/{spuId}/detail}")
+    @ApiOperation("根据spuId查询spuDetail信息")
+    @ApiImplicitParam(value = "spuId",name="spuId",example = "2")
+    public JsonResult<SeckillSpuDetailSimpleVO> getSeckillSpuDetail(
+            @PathVariable Long spuId){
+        SeckillSpuDetailSimpleVO seckillSpuDetail = seckillSpuService.getSeckillSpuDetail(spuId);
+        return JsonResult.ok(seckillSpuDetail);
+    }
 }
